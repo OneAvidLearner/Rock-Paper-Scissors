@@ -1,3 +1,5 @@
+let winCounter=0;
+let lossCounter=0;
 function computerPlay(){
     let result = Math.floor(Math.random()*3);
 
@@ -63,6 +65,5 @@ function game(){
     }
     console.log(`The final score is ${winCounter} - ${lossCounter} ${(winCounter>lossCounter)?"You win":(winCounter==lossCounter)?"It's a draw":"You lose"}`)
 }
-let winCounter=0;
-let lossCounter=0;
+
 game();
