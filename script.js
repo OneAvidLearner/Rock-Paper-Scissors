@@ -17,53 +17,103 @@ function computerPlay(){
 function playRound(playerSelection, computerSelection){
 
     playerSelection = playerSelection.toLowerCase();
+    result.style.fontSize = "30px"; 
 
     if(playerSelection == computerSelection){
-        return "It's a Draw";
+        result.textContent = `It's a draw
+        The current score is ${winCounter} - ${lossCounter}`;
     }
 
     else if (playerSelection == "rock"){
         switch (computerSelection){
             case "paper":
                 lossCounter++;
-                return "You Lose! Paper beats Rock";
+                result.textContent = `You Lose! Paper beats Rock
+                The current score is ${winCounter} - ${lossCounter}`;
+    
+                break;
             case "scissors":
                 winCounter++;
-                return "You Win! Rock beats Scissors";
+                result.textContent = `You Win! Rock beats Scissors
+                The current score is ${winCounter} - ${lossCounter}`;
+
+                break;
         }
     }
     else if(playerSelection == "paper"){
         switch (computerSelection){
             case "rock":
                 winCounter++;
-                return "You Win! Paper beats Rock";
+                result.textContent = `You Win! Paper beats Rock
+                The current score is ${winCounter} - ${lossCounter}`;
+
+                break;
             case "scissors":
                 lossCounter++;
-                return "You Lose! Scissors beats Paper";
+                result.textContent = `You Lose! Scissors beats Paper
+                The current score is ${winCounter} - ${lossCounter}`;
+                
+                break;
         }
     }
     else {
         switch (computerSelection){
             case "rock":
                 lossCounter++;
-                return "You Lose! Rock beats Scissors";
+                result.textContent = `You Lose! Rock beats Scissors
+                The current score is ${winCounter} - ${lossCounter}`;
+                
+                break; 
             case "paper":
                 winCounter++;
-                return "You Win! Scissors beats Paper";
+                result.textContent = `You Win! Scissors beats Paper
+                The current score is ${winCounter} - ${lossCounter}`;
+                
+                break;
         }
-
+        
     }
+    game();
 
 
 }
-function game(){
-    let choice = prompt("Make a choice");
+const rck = document.querySelector('#rck');
+rck.addEventListener('click', function(e){
+    playRound('rock', computerPlay());
+});
 
-    for (let i = 0; i<5; i++){
+const ppr = document.querySelector('#ppr');
+ppr.addEventListener('click', function(e){
+    playRound('rock', computerPlay());
+});
+
+const scs = document.querySelector('#scs');
+scs.addEventListener('click', function(e){
+    playRound('rock', computerPlay());
+});
+
+result = document.querySelector('#result')
+
+
+function game(){
+    if(winCounter==5){
+        result.style.fontSize = "50px"; 
+        result.textContent = `You Won!
+        The Final score is ${winCounter} - ${lossCounter}`;
+        winCounter=0;
+        lossCounter=0;
         
-        console.log(playRound(choice,computerPlay(choice)));
     }
-    console.log(`The final score is ${winCounter} - ${lossCounter} ${(winCounter>lossCounter)?"You win":(winCounter==lossCounter)?"It's a draw":"You lose"}`)
+    else if (lossCounter==5){
+        result.style.fontSize = "50px"; 
+        result.textContent = `You Lost!
+        The Final score is ${winCounter} - ${lossCounter}`;
+        winCounter=0;
+        lossCounter=0;
+        
+    }
+
+
 }
 
 game();
